@@ -341,31 +341,381 @@ let result = quoteSample.match(alphabetRegexV2).length;
 ```  
 
 
-### Match Everything But Letters and Numbers
+### Match Everything But Letters and Numbers  
 
-### Match All Numbers
+**19 - Match Everything But Letters and Numbers**  
 
-### Match All Non-Numbers
+We've learned that you can use a shortcut to match alphanumerics `[A-Za-z0-9_]` using `\w`. A natural pattern you might want to search for is the opposite of alphanumerics.
 
-### Restrict Possible Usernames
+You can search for the opposite of the \w with \W. Note, the opposite pattern uses a capital letter. This shortcut is the same as `[^A-Za-z0-9_]`.  
 
-### Match Whitespace
+```js
+let shortHand = /\W/;
+let numbers = "42%";
+let sentence = "Coding!";
+numbers.match(shortHand);
+sentence.match(shortHand);
+```  
 
-### Match Non-Whitespace Characters
+The first match call would return the value `["%"]` and the second would return `["!"]`.
 
-### Specify Upper and Lower Number of Matches
+Use the shorthand character class `\W` to count the number of non-alphanumeric characters in various quotes and strings.  
 
-### Specify Only the Lower Number of Matches
+```js 
+let quoteSample = "The five boxing wizards jump quickly.";
+let nonAlphabetRegex = /\W/g; // Change this line
+let result = quoteSample.match(nonAlphabetRegex).length;
+```  
 
-### Specify Exact Number of Matches
+### Match All Numbers  
 
-### Check for All or None
+**20 - Match All Numbers**  
 
-### Positive and Negative Lookahead
+You've learned shortcuts for common string patterns like alphanumerics. Another common pattern is looking for just digits or numbers.
 
-### Check For Mixed Grouping of Characters
+The shortcut to look for digit characters is \d, with a lowercase d. This is equal to the character class [0-9], which looks for a single character of any number between zero and nine.
 
-### Reuse Patterns Using Capture Groups
+Use the shorthand character class \d to count how many digits are in movie titles. Written out numbers ("six" instead of 6) do not count.  
+
+```js
+let movieName = "2001: A Space Odyssey";
+let numRegex = /\d/g; // Change this line
+let result = movieName.match(numRegex).length;
+```  
+
+### Match All Non-Numbers  
+
+**21 - Match All Non-Numbers**  
+
+The last challenge showed how to search for digits using the shortcut \d with a lowercase d. You can also search for non-digits using a similar shortcut that uses an uppercase D instead.
+
+The shortcut to look for non-digit characters is \D. This is equal to the character class [^0-9], which looks for a single character that is not a number between zero and nine.
+
+Use the shorthand character class for non-digits \D to count how many non-digits are in movie titles.  
+
+```js
+let movieName = "2001: A Space Odyssey";
+let noNumRegex = /\D/g; // Change this line
+let result = movieName.match(noNumRegex).length;
+```  
+
+### Restrict Possible Usernames  
+
+**22 - Restrict Possible Usernames**  
+
+Usernames are used everywhere on the internet. They are what give users a unique identity on their favorite sites.
+
+You need to check all the usernames in a database. Here are some simple rules that users have to follow when creating their username.  
+
+1. Usernames can only use alphanumeric characters.  
+
+2. The only numbers in the username have to be at the end. There can be zero or more of them at the end. Username cannot start with the number.
+
+3. Username letters can be lowercase and uppercase.  
+
+4. Usernames have to be at least two characters long. A two-character username can only use alphabet letters as characters.  
+
+5. Change the regex userCheck to fit the constraints listed above.  
+
+```js
+let username = "JackOfAllTrades";
+let userCheck = /^[a-z][a-z]+\d*$|^[a-z]\d\d+$/i;
+let result = userCheck.test(username);
+console.log(result)
+
+/*
+Code Explanation
+  - ^ - start of input
+  - [a-z] - first character is a letter
+  - [a-z]+ - following characters are letters
+  - \d*$ - input ends with 0 or more digits
+  - | - or
+  - ^[a-z] - first character is a letter
+  - \d\d+ - following characters are 2 or more digits
+  - $ - end of input
+*/
+```  
+
+**OR**  
+
+```js
+let username = "JackOfAllTrades";
+const userCheck = /^[a-z]([0-9]{2,}|[a-z]+\d*)$/i;
+let result = userCheck.test(username);
+
+/*
+Code Explanation
+  - ^ - start of input
+  - [a-z] - first character is a letter
+  - [0-9]{2,} - ends with two or more numbers
+  - | - or
+  - [a-z]+ - has one or more letters next
+  - \d* - and ends with zero or more numbers
+  - $ - end of input
+  - i - ignore case of input
+*/
+```  
+
+### Match Whitespace  
+
+**23 - Match Whitespace**  
+
+The challenges so far have covered matching letters of the alphabet and numbers. You can also match the whitespace or spaces between letters.
+
+You can search for whitespace using `\s`, which is a lowercase `s`. This pattern not only matches whitespace, but also carriage return, tab, form feed, and new line characters. You can think of it as similar to the character class `[ \r\t\f\n\v]`.
+
+```js
+let whiteSpace = "Whitespace. Whitespace everywhere!"
+let spaceRegex = /\s/g;
+whiteSpace.match(spaceRegex);
+// This match call would return [" ", " "].
+```  
+
+Change the regex countWhiteSpace to look for multiple whitespace characters in a string.  
+
+```js
+let sample = "Whitespace is important in separating words";
+let countWhiteSpace = /\s/g; // Change this line
+let result = sample.match(countWhiteSpace);
+console.log(result);
+```  
+
+### Match Non-Whitespace Characters  
+
+**24 - Match Non-Whitespace Characters**  
+
+You learned about searching for whitespace using \s, with a lowercase s. You can also search for everything except whitespace.
+
+Search for non-whitespace using \S, which is an uppercase s. This pattern will not match whitespace, carriage return, tab, form feed, and new line characters. You can think of it being similar to the character class [^ \r\t\f\n\v].
+
+```js
+let whiteSpace = "Whitespace. Whitespace everywhere!"
+let nonSpaceRegex = /\S/g;
+whiteSpace.match(nonSpaceRegex).length;
+// The value returned by the .length method would be 32.
+```
+
+Change the regex countNonWhiteSpace to look for multiple non-whitespace characters in a string.
+
+```js
+let sample = "Whitespace is important in separating words";
+let countNonWhiteSpace = /\S/g; // Change this line
+let result = sample.match(countNonWhiteSpace);
+console.log(result);
+```  
+
+### Specify Upper and Lower Number of Matches  
+
+**25 - Specify Upper and Lower Number of Matches**  
+
+Recall that you use the plus sign `+` to look for one or more characters and the asterisk `*` to look for zero or more characters. These are convenient but sometimes you want to match a certain range of patterns.
+
+You can specify the lower and upper number of patterns with quantity specifiers. Quantity specifiers are used with curly brackets `({ and })`. You put two numbers between the curly brackets - for the lower and upper number of patterns.
+
+For example, to match only the letter a appearing between `3` and `5` times in the string `ah`, your regex would be `/a{3,5}h/`.
+
+```js
+let A4 = "aaaah";
+let A2 = "aah";
+let multipleA = /a{3,5}h/;
+multipleA.test(A4);
+multipleA.test(A2);
+```  
+
+The first test call would return true, while the second would return false.
+
+Change the regex ohRegex to match the entire phrase Oh no only when it has 3 to 6 letter h's.  
+
+```js
+let ohStr = "Ohhh no";
+let ohRegex = /Oh{3,6}\sno/; // Change this line
+let result = ohRegex.test(ohStr);
+```  
+
+### Specify Only the Lower Number of Matches  
+
+**26 -Specify Only the Lower Number of Matches**  
+
+You can specify the lower and upper number of patterns with quantity specifiers using curly brackets. Sometimes you only want to specify the lower number of patterns with no upper limit.
+
+To only specify the lower number of patterns, keep the first number followed by a comma.
+
+For example, to match only the string hah with the letter a appearing at least 3 times, your regex would be `/ha{3,}h/`.
+
+```js
+let A4 = "haaaah";
+let A2 = "haah";
+let A100 = "h" + "a".repeat(100) + "h";
+let multipleA = /ha{3,}h/;
+multipleA.test(A4);
+multipleA.test(A2);
+multipleA.test(A100);
+```  
+
+In order, the three test calls would return true, false, and true.
+
+Change the regex haRegex to match the word Hazzah only when it has four or more letter z's.  
+
+```js
+let haStr = "Hazzzzah";
+let haRegex = /Haz{4,}ah/gi; // Change this line
+let result = haRegex.test(haStr);
+```
+
+### Specify Exact Number of Matches  
+
+**27 -Specify Exact Number of Matches**  
+
+You can specify the lower and upper number of patterns with quantity specifiers using curly brackets. Sometimes you only want a specific number of matches.
+
+To specify a certain number of patterns, just have that one number between the curly brackets.
+
+For example, to match only the word hah with the letter a 3 times, your regex would be /ha{3}h/.
+
+```js
+let A4 = "haaaah";
+let A3 = "haaah";
+let A100 = "h" + "a".repeat(100) + "h";
+let multipleHA = /ha{3}h/;
+multipleHA.test(A4);
+multipleHA.test(A3);
+multipleHA.test(A100);
+```  
+
+In order, the three test calls would return false, true, and false.
+
+Change the regex timRegex to match the word Timber only when it has four letter m's.
+
+```js
+let timStr = "Timmmmber";
+let timRegex = /Tim{4}ber/; // Change this line
+let result = timRegex.test(timStr);
+```
+
+### Check for All or None  
+
+**28 - Check for All or None**  
+
+Sometimes the patterns you want to search for may have parts of it that may or may not exist. However, it may be important to check for them nonetheless.
+
+You can specify the possible existence of an element with a question mark, `?`. This checks for zero or one of the preceding element. You can think of this symbol as saying the previous element is optional.
+
+For example, there are slight differences in American and British English and you can use the question mark to match both spellings.  
+
+```js
+let american = "color";
+let british = "colour";
+let rainbowRegex= /colou?r/;
+rainbowRegex.test(american);
+rainbowRegex.test(british);
+```  
+
+Both uses of the test method would return true.
+
+Change the regex favRegex to match both the American English (favorite) and the British English (favourite) version of the word.  
+
+```js
+let favWord = "favorite";
+let favRegex = /favou?rite/; // Change this line
+let result = favRegex.test(favWord);
+```
+
+### Positive and Negative Lookahead  
+
+**29 - Positive and Negative Lookahead**  
+
+Lookaheads are patterns that tell JavaScript to look-ahead in your string to check for patterns further along. This can be useful when you want to search for multiple patterns over the same string.
+
+There are two kinds of lookaheads: positive lookahead and negative lookahead.
+
+A positive lookahead will look to make sure the element in the search pattern is there, but won't actually match it. A positive lookahead is used as `(?=...)` where the `...` is the required part that is not matched.
+
+On the other hand, a negative lookahead will look to make sure the element in the search pattern is not there. A negative lookahead is used as `(?!...)` where the `...` is the pattern that you do not want to be there. The rest of the pattern is returned if the negative lookahead part is not present.
+
+Lookaheads are a bit confusing but some examples will help.  
+
+```js
+let quit = "qu";
+let noquit = "qt";
+let quRegex= /q(?=u)/;
+let qRegex = /q(?!u)/;
+quit.match(quRegex);
+noquit.match(qRegex);
+```  
+
+Both of these match calls would return ["q"].
+
+A more practical use of lookaheads is to check two or more patterns in one string. Here is a (naively) simple password checker that looks for between 3 and 6 characters and at least one number:
+
+```js
+let password = "abc123";
+let checkPass = /(?=\w{3,6})(?=\D*\d)/;
+checkPass.test(password);
+```  
+
+Use lookaheads in the pwRegex to match passwords that are greater than 5 characters long, and have two consecutive digits.  
+
+```js
+let sampleWord = "astronaut";
+let pwRegex = /(?=\w{6,})(?=.*\d{2})/
+; // Change this line
+let result = pwRegex.test(sampleWord);
+```
+
+### Check For Mixed Grouping of Characters  
+
+**30 - Check For Mixed Grouping of Characters**  
+
+Sometimes we want to check for groups of characters using a Regular Expression and to achieve that we use parentheses `()`.
+
+If you want to find either Penguin or Pumpkin in a string, you can use the following Regular Expression: `/P(engu|umpk)in/g`
+
+Then check whether the desired string groups are in the test string by using the test() method.
+```js
+let testStr = "Pumpkin";
+let testRegex = /P(engu|umpk)in/;
+testRegex.test(testStr);
+```
+
+The test method here would return true.
+
+Fix the regex so that it checks for the names of Franklin Roosevelt or Eleanor Roosevelt in a case sensitive manner and it should make concessions for middle names.
+
+Then fix the code so that the regex that you have created is checked against myString and either true or false is returned depending on whether the regex matches.
+
+```js
+let myString = "Eleanor Roosevelt";
+let myRegex = /(Franklin|Eleanor) (([A-Z]\.?|[A-Z][a-z]+) )?Roosevelt/;
+let result = myRegex.test(myString); // Change this line
+// After passing the challenge experiment with myString and see how the grouping works
+```
+
+### Reuse Patterns Using Capture Groups  
+**31 - Reuse Patterns Using Capture Groups**  
+
+Say you want to match a word that occurs multiple times like below.
+
+let repeatStr = "row row row your boat";
+You could use /row row row/, but what if you don't know the specific word repeated? Capture groups can be used to find repeated substrings.
+
+Capture groups are constructed by enclosing the regex pattern to be captured in parentheses. In this case, the goal is to capture a word consisting of alphanumeric characters so the capture group will be \w+ enclosed by parentheses: /(\w+)/.
+
+The substring matched by the group is saved to a temporary "variable", which can be accessed within the same regex using a backslash and the number of the capture group (e.g. \1). Capture groups are automatically numbered by the position of their opening parentheses (left to right), starting at 1.
+
+The example below matches a word that occurs thrice separated by spaces:
+
+let repeatRegex = /(\w+) \1 \1/;
+repeatRegex.test(repeatStr); // Returns true
+repeatStr.match(repeatRegex); // Returns ["row row row", "row"]
+Using the .match() method on a string will return an array with the matched substring, along with its captured groups.
+
+Use capture groups in reRegex to match a string that consists of only the same number repeated exactly three times separated by single spaces.  
+
+```js
+let repeatNum = "42 42 42";
+let reRegex = /^(\d+) \1 \1$/; // Change this line
+let result = reRegex.test(repeatNum);
+```
 
 ### Use Capture Groups to Search and Replace
 
