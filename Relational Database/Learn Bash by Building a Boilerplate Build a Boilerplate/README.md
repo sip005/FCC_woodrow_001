@@ -365,3 +365,307 @@ ls --help
 
 ## 046  
 
+```sh
+ls -a
+```  
+
+## 047
+
+```sh
+cd .
+```
+
+## 048  
+
+You didn't go anywhere. The . takes you to the folder you are in, and .. takes you back, or up, a folder. Websites need some images. Create background.jpg in the website folder.  
+
+```sh
+touch background.jpg
+```  
+
+## 049  
+
+Next, add a header image. Create header.png in the website folder.  
+
+```sh
+touch header.png
+```  
+
+## 050  
+
+Finally, create footer.jpeg in the website folder.  
+
+```sh
+touch footer.jpeg
+```  
+
+## 051  
+
+Use the list command to check out the images you just added.  
+
+```sh
+ls
+```  
+
+## 052
+
+Looks like images show up in pink. There's also three fonts to use for the website. The first one is "roboto". Create roboto.font in the website folder.  
+
+```sh
+touch roboto.font
+```  
+
+## 053  
+
+The next one is "lato". Create lato.font in the website folder.  
+
+```sh
+touch lato.font
+```  
+
+## 054  
+
+Lastly, create menlo.font in the website folder.  
+
+```sh
+touch menlo.font
+```
+
+## 055  
+
+List the contents of this folder to see your new font files.  
+
+```sh
+ls
+```
+
+## 056  
+
+Your three font files are there. There's three icons for the website as well. Create CodeAlly.svg in the website folder.  
+
+```sh
+touch CodeAlly.svg
+```  
+
+## 057  
+
+Next, create CodeRoad.svg in the website folder.
+
+```sh
+touch CodeRoad.svg
+```
+
+## 058  
+
+Finally, create freeCodeCamp.svg in the website folder.  
+
+```sh
+touch freeCodeCamp.svg
+```  
+
+## 059  
+
+Check out the new icons you just added by listing the contents of the folder they are in.  
+
+```sh
+ls
+```  
+
+## 060  
+
+The icons are pink as well. I think the images should go in a separate folder to clean it up a little. Make an images directory in the website folder to put them in.  
+
+```sh
+mkdir images
+```  
+
+## 061  
+
+List the contents of the website folder to make sure your new folder is there.  
+
+```sh
+ls
+```  
+
+## 062  
+
+There's your new images folder. It's blue. You can copy a file with cp <file> <destination>. cp stands for "copy". Copy background.jpg to your images folder.  
+
+```sh
+cp background.jpg ./images/
+```
+
+## 063  
+
+Better make sure it worked. Change to the images directory.  
+
+```sh
+cd images
+```
+
+## 064  
+
+List the contents to see if background.jpg is here.  
+
+```sh
+ls
+```  
+
+## 065  
+
+There it is. Looks like the copy worked. Change back to the website directory so you can copy the other ones.  
+
+```sh
+cd ..
+```  
+
+## 066  
+
+Remind yourself of the files here by listing the contents.  
+
+```sh
+ls
+```
+
+## 067  
+
+You copied the background image to the images folder so you don't need the one here anymore. You can remove a file with rm <filename>. Remove background.jpg from the website folder.  
+
+```sh
+rm background.jpg
+```  
+
+## 068  
+
+List the contents to make sure it's gone.
+
+```sh
+ls
+```  
+
+## 069  
+
+Okay, it's gone. Next, copy header.png to the images folder.  
+
+```sh
+cp header.png ./images/
+```
+
+## 070
+
+Last, copy the "footer" image to the images folder.  
+
+```sh
+cp footer.jpeg ./images/
+```
+
+## 071  
+
+All the images should be copied over. Change to the images directory so you can make sure.  
+
+```sh
+cd images
+```  
+
+## 072  
+
+Check if the images are here by listing the contents.  
+
+```sh
+ls
+```
+
+## 073  
+
+They all made it here. Go back to the website folder so you can delete the original files.  
+
+```sh
+cd ..
+```
+
+## 074  
+
+List the contents to remind yourself of the filenames to delete.  
+
+```sh
+ls
+```  
+
+## 075  
+
+There's two that you don't need anymore. Remove the "header" image file from the website folder since you copied to the images folder.  
+
+```sh
+rm header.png
+```
+
+## 076  
+
+It should be gone. Remove the "footer" image from the website folder as well.  
+
+```sh
+rm footer.jpeg
+```  
+
+## 077  
+
+List the contents of the website folder to check if they are gone.  
+
+```sh
+ls
+```  
+
+## 078  
+
+Looks like they're all deleted. There was a mistake with the extensions for the font files. You can rename them with mv like this: mv <filename> <new_filename>. mv stands for "move", it can rename or move something. Rename roboto.font to roboto.woff.  
+
+```sh
+mv roboto.font roboto.woff
+```  
+
+## 079  
+
+Use "list" to check if it worked.
+
+```sh
+ls
+```  
+
+## 080  
+
+Do you see the "roboto" font? The rename worked. Next, rename the "lato" font file to lato.ttf.  
+
+```sh
+mv lato.font lato.ttf
+```  
+
+## 081  
+
+Lastly, rename the "menlo" font to menlo.otf. 
+
+```sh
+mv menlo.font menlo.otf
+```
+
+## 082  
+
+Use the "list" command to make sure those last two got renamed.  
+
+```sh
+ls
+```  
+
+## 083  
+
+Take a look at the files to make sure they got renamed. Those font files could be organized into a folder as well. Make a fonts directory in the website folder to put them in.  
+
+```sh
+mkdir fonts
+```  
+
+## 084  
+
+
+```sh
+
+```
